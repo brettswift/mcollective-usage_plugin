@@ -1,14 +1,7 @@
 module MCollective
   module Agent
     class Usage<RPC::Agent
-      metadata :name        => 'usage',
-               :description => 'reports on disk utilization',
-               :author      => 'Brett Swift',
-               :license     => 'MIT',
-               :version     => '0.1',
-               :url         => 'http://github.com',
-               :timeout     => 120
- 
+     
       action 'isfull' do
         validate :threshold, Integer
         run_isfull :threshold
