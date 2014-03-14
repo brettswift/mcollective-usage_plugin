@@ -16,18 +16,18 @@ class usage_plugin (
   file { "${plugins_dir}/agent/usage.ddl":
     source => "puppet:///modules/${module_name}/agent/usage.ddl",
   }
-  if $application {
-    file { "${plugins_dir}/application/usage.rb":
-      source => "puppet:///modules/${module_name}/application/usage.rb",
-    }
-  }
-  if $agent {
+  # if $application {
+  #   file { "${plugins_dir}/application/usage.rb":
+  #     source => "puppet:///modules/${module_name}/application/usage.rb",
+  #   }
+  # }
+  # if $agent {
     file { "${plugins_dir}/agent/usage.rb":
       source => "puppet:///modules/${module_name}/agent/usage.rb",
     }
-  } else {
-    file { "${plugins_dir}/agent/usage.rb":
-      ensure => absent,
-    }
-  }
+  # # } else {
+  #   file { "${plugins_dir}/agent/usage.rb":
+  #     ensure => absent,
+  #   }
+  # }
 }
