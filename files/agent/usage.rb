@@ -4,7 +4,7 @@ module MCollective
 
       action 'disk' do
         threshold = request[:threshold] ||= 80
-        run_is_disk_full :threshold
+        run_is_disk_full threshold.to_i
       end
 
       private
