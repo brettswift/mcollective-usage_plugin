@@ -7,21 +7,21 @@ metadata :name        => "usage",
 :timeout              => 120
 
 
-action "isfull", :description => "Check disk space usage against threshold" do
+action "disk", :description => "Check disk space usage against threshold" do
   input :threshold,
         :prompt      => "Threshold to check",
         :description => "Percent to check against",
-        :type        => :integer,
-        :validation  => '.',
-        :optional    => true,
-        :maxlength   => 2
+        :type        => :string,
+        :validation  => '^[0-9]{2}',
+        :optional    => false,
+        :default     => 80
 
-  output :status,
-        :description => "Return status of disk check",
-        :display_as  => "Return Status",
+  output :usage,
+        :description => "Disk Usage %",
+        :display_as  => "Disk Usage %",
         :default     => "unknown"
 
   summarize do
-      aggregate summary(:status)
+      aggregate summary(:usage)
     end
 end
