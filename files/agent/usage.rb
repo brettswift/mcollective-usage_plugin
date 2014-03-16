@@ -3,7 +3,7 @@ module MCollective
     class Usage<RPC::Agent
 
       action 'disk' do
-        validate :threshold, Integer
+        validate :threshold, String
         run_is_disk_full :threshold
       end
 
