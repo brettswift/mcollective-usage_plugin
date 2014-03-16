@@ -24,7 +24,7 @@ module MCollective
               reply[:usage] = utilization
             end
           end
-        end
+        end 
 
         reply[:usage] = highest_percent_full
         reply.fail "Usage exceeded threshold of #{threshold}. Was: #{highest_percent_full}" unless highest_percent_full < threshold
