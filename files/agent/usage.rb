@@ -3,14 +3,13 @@ module MCollective
     class Usage<RPC::Agent
 
       action 'disk' do
-        validate :threshold, String
+        threshold = request[:threshold] ||= 80
         run_is_disk_full :threshold
       end
 
       private
-      def run_is_disk_full()
+      def run_is_disk_full(threshold)
         cmd = "/bin/df  -h | awk {'print $5'}" #--total
-        threshold = request[:threshold]
 
         dfout = `#{cmd}`
 
@@ -28,7 +27,7 @@ module MCollective
         end
 
         reply[:usage] = highest_percent_full
-        reply.fail "Usage exceeded threshold of #{request[:threshold]}. Was: #{highest_percent_full}" unless highest_percent_full < threshold
+        reply.fail "Usage exceeded threshold of #{threshold}. Was: #{highest_percent_full}" unless highest_percent_full < threshold
       end
     end
   end

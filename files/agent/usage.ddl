@@ -13,7 +13,7 @@ action "disk", :description => "Check disk space usage against threshold" do
         :description => "Percent to check against",
         :type        => :string,
         :validation  => '^[0-9]{2}',
-        :optional    => false,
+        :optional    => true,
         :maxlength   => 2,
         :default     => 80
 
