@@ -5,13 +5,17 @@ class usage_plugin (
 ) inherits usage_plugin::params {
   # Only usage boxes get the agent, but everyone gets the ddl &
   # application
+
+
+
   File {
     ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    notify => Service['mcollective'],
+    # notify => Service['mcollective'],
   }
+
   # Put ddl everywhere
   file { "${plugins_dir}/agent/usage.ddl":
     source => "puppet:///modules/${module_name}/agent/usage.ddl",
