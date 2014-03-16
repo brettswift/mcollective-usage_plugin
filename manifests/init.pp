@@ -6,32 +6,43 @@ class usage_plugin (
   # Only usage boxes get the agent, but everyone gets the ddl &
   # application
 
-
+  Class['pe_mcollective::server::plugins'] -> Class[$title] ~> Service['pe-mcollective']
+  include pe_mcollective
+  $plugin_basedir = $pe_mcollective::server::plugins::plugin_basedir
+  $mco_etc        = $pe_mcollective::params::mco_etc
 
   File {
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    # notify => Service['mcollective'],
+    owner => $pe_mcollective::params::root_owner,
+    group => $pe_mcollective::params::root_group,
+    mode  => $pe_mcollective::params::root_mode,
   }
 
-  # Put ddl everywhere
-  file { "${plugins_dir}/agent/usage.ddl":
-    source => "puppet:///modules/${module_name}/agent/usage.ddl",
+  file {"${plugin_basedir}/agent/usage.ddl":
+    ensure => file,
+    source => "puppet:///modules/${module_name}/usage_plugin/agent/usage.ddl",
   }
-  # if $application {
-  #   file { "${plugins_dir}/application/usage.rb":
-  #     source => "puppet:///modules/${module_name}/application/usage.rb",
-  #   }
+
+  file {"${plugin_basedir}/agent/usage.rb":
+    ensure => file,
+    source => "puppet:///modules/${module_name}/usage_plugin/agent/usage.rb",
+  }
+  #
+  # # Put ddl everywhere
+  # file { "${plugins_dir}/agent/usage.ddl":
+  #   source => "puppet:///modules/${module_name}/agent/usage.ddl",
   # }
-  # if $agent {
-    file { "${plugins_dir}/agent/usage.rb":
-      source => "puppet:///modules/${module_name}/agent/usage.rb",
-    }
-  # # } else {
+  # # if $application {
+  # #   file { "${plugins_dir}/application/usage.rb":
+  # #     source => "puppet:///modules/${module_name}/application/usage.rb",
+  # #   }
+  # # }
+  # # if $agent {
   #   file { "${plugins_dir}/agent/usage.rb":
-  #     ensure => absent,
+  #     source => "puppet:///modules/${module_name}/agent/usage.rb",
   #   }
-  # }
+  # # # } else {
+  # #   file { "${plugins_dir}/agent/usage.rb":
+  # #     ensure => absent,
+  # #   }
+  # # }
 }

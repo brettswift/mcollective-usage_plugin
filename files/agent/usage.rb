@@ -1,14 +1,14 @@
 module MCollective
   module Agent
     class Usage<RPC::Agent
-     
+
       action 'isfull' do
-        validate :threshold, Integer
+        # validate :threshold, Integer
         run_isfull :threshold
       end
 
       private
-      def run_isfull(threshold = 80)
+      def run_isfull()
         cmd = "/bin/df  -h | awk {'print $5'}" #--total
 
         dfout = `#{cmd}`
