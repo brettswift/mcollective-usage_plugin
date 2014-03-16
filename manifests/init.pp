@@ -19,12 +19,12 @@ class usage_plugin (
 
   file {"${plugin_basedir}/agent/usage.ddl":
     ensure => file,
-    source => "puppet:///modules/${module_name}/usage_plugin/agent/usage.ddl",
+    source => "puppet:///modules/${module_name}/agent/usage.ddl",
   }
 
   file {"${plugin_basedir}/agent/usage.rb":
     ensure => file,
-    source => "puppet:///modules/${module_name}/usage_plugin/agent/usage.rb",
+    source => "puppet:///modules/${module_name}/agent/usage.rb",
   }
   #
   # # Put ddl everywhere
