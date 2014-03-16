@@ -27,9 +27,6 @@ class usage_plugin (
     source => "puppet:///modules/${module_name}/agent/usage.rb",
   }
 
-  package {'awk':
-    ensure => "installed"
-  }
   #
   # # Put ddl everywhere
   # file { "${plugins_dir}/agent/usage.ddl":
