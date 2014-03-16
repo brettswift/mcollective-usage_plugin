@@ -14,6 +14,7 @@ action "disk", :description => "Check disk space usage against threshold" do
         :type        => :string,
         :validation  => '^[0-9]{2}',
         :optional    => false,
+        :maxlength   => 2,
         :default     => 80
 
   output :usage,
