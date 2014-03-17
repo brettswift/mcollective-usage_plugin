@@ -23,35 +23,35 @@ action "disk", :description => "Check disk space usage against threshold" do
         :default     => "unknown"
 end
 
- action "mem", :description => "Check free memory usage against threshold (using buffers/cache)" do
-   input :threshold,
-         :prompt      => "Threshold to check (%)",
-         :description => "Percent to check against",
-         :type        => :string,
-         :validation  => '^[0-9]{2}',
-         :optional    => true,
-         :maxlength   => 2,
-         :default     => 80
+action "mem", :description => "Check free memory usage against threshold (using buffers/cache)" do
+ input :threshold,
+       :prompt      => "Threshold to check (%)",
+       :description => "Percent to check against",
+       :type        => :string,
+       :validation  => '^[0-9]{2}',
+       :optional    => true,
+       :maxlength   => 2,
+       :default     => 80
 
-   output :usage,
-         :description => "Memory Usage %",
-         :display_as  => "Memory Usage %",
-         :default     => "unknown"
+ output :usage,
+       :description => "Memory Usage %",
+       :display_as  => "Memory Usage %",
+       :default     => "unknown"
 end
 
- action "swap", :description => "Check swap usage against threshold" do
-   input :threshold,
-         :prompt      => "Threshold to check (%)",
-         :description => "Percent to check against",
-         :type        => :string,
-         :validation  => '^[0-9]{2}',
-         :optional    => true,
-         :maxlength   => 2,
-         :default     => 40
+action "swap", :description => "Check swap usage against threshold" do
+ input :threshold,
+       :prompt      => "Threshold to check (%)",
+       :description => "Percent to check against",
+       :type        => :string,
+       :validation  => '^[0-9]{2}',
+       :optional    => true,
+       :maxlength   => 2,
+       :default     => 40
 
-   output :usage,
-         :description => "Swap Usage %",
-         :display_as  => "Swap Usage %",
-         :default     => "unknown"
+ output :usage,
+       :description => "Swap Usage %",
+       :display_as  => "Swap Usage %",
+       :default     => "unknown"
 
 end
