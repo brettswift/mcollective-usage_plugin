@@ -14,8 +14,7 @@ action "disk", :description => "Check disk space usage against threshold" do
         :type        => :string,
         :validation  => '^[0-9]{2}',
         :optional    => true,
-        :maxlength   => 2,
-        -- :default     => "80" not respected
+        :maxlength   => 2
 
   output :usage,
          :description => "Disk Usage %",
@@ -30,8 +29,7 @@ action "mem", :description => "Check free memory usage against threshold (using 
        :type        => :string,
        :validation  => '^[0-9]{2}',
        :optional    => true,
-       :maxlength   => 2,
-      --  :default     => "80" not respected
+       :maxlength   => 2
 
  output :usage,
         :description => "Memory Usage %",
@@ -46,8 +44,7 @@ action "swap", :description => "Check swap usage against threshold" do
        :type        => :string,
        :validation  => '^[0-9]{2}',
        :optional    => true,
-       :maxlength   => 2,
-      --  :default     => "40" not respected
+       :maxlength   => 2
 
  output :usage,
         :description => "Swap Usage %",
