@@ -14,12 +14,12 @@ module MCollective
 
       action 'swap' do
         threshold = request[:threshold]
-        run_is_mem_full threshold.to_i
+        run_ threshold.to_i
       end
 
       private
       def run_is_disk_full(threshold)
-        cmd = "/bin/df  -h | awk {'print $5'}" #--total
+        cmd = "\/bin\/df  -h --total | awk '\{if (NR!=3) print $5; else print $4\}'"
 
         dfout = `#{cmd}`
 
@@ -55,7 +55,7 @@ module MCollective
       end
 
 
-      def run_is_swappy(threshold)
+      def run_swap_check(threshold)
         cmd_swap = "free -m | awk '\/Swap:\/ \{ total=$2;  used=$3\} END \{ print used\/total\}'"
 
         out_swap = `#{cmdswap}`.to_f * 100

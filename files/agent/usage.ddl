@@ -18,9 +18,9 @@ action "disk", :description => "Check disk space usage against threshold" do
         :default     => 80
 
   output :usage,
-        :description => "Disk Usage %",
-        :display_as  => "Disk Usage %",
-        :default     => "unknown"
+         :description => "Disk Usage %",
+         :display_as  => "Disk Usage %",
+         :default     => "unknown"
 end
 
 action "mem", :description => "Check free memory usage against threshold (using buffers/cache)" do
@@ -34,9 +34,9 @@ action "mem", :description => "Check free memory usage against threshold (using 
        :default     => 80
 
  output :usage,
-       :description => "Memory Usage %",
-       :display_as  => "Memory Usage %",
-       :default     => "unknown"
+        :description => "Memory Usage %",
+        :display_as  => "Memory Usage %",
+        :default     => "unknown"
 end
 
 action "swap", :description => "Check swap usage against threshold" do
@@ -50,8 +50,8 @@ action "swap", :description => "Check swap usage against threshold" do
        :default     => 40
 
  output :usage,
-       :description => "Swap Usage %",
-       :display_as  => "Swap Usage %",
-       :default     => "unknown"
+        :description => "Swap Usage %",
+        :display_as  => "Swap Usage %",
+        :default     => "unknown"
 
 end
