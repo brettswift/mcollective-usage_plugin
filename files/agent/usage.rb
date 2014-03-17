@@ -3,18 +3,21 @@ module MCollective
     class Usage<RPC::Agent
 
       action 'disk' do
-        threshold = request[:threshold]
-        run_is_disk_full threshold.to_i
+        threshold = request[:threshold].to_i
+        threshold = 80 if threshold = 0
+        run_is_disk_full threshold
       end
 
       action 'mem' do
-        threshold = request[:threshold]
-        run_is_mem_full threshold.to_i
+        threshold = request[:threshold].to_i
+        threshold = 80 if threshold = 0
+        run_is_mem_full threshold
       end
 
       action 'swap' do
-        threshold = request[:threshold]
-        run_swap_check threshold.to_i
+        threshold = request[:threshold].to_i
+        threshold = 40 if threshold = 0
+        run_swap_check threshold
       end
 
       private
