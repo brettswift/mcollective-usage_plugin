@@ -4,19 +4,19 @@ module MCollective
 
       action 'disk' do
         threshold = request[:threshold].to_i
-        threshold = 80 if threshold = 0
+        threshold = 80 if threshold == 0
         run_is_disk_full threshold
       end
 
       action 'mem' do
         threshold = request[:threshold].to_i
-        threshold = 80 if threshold = 0
+        threshold = 80 if threshold == 0
         run_is_mem_full threshold
       end
 
       action 'swap' do
         threshold = request[:threshold].to_i
-        threshold = 40 if threshold = 0
+        threshold = 40 if threshold == 0
         run_swap_check threshold
       end
 
@@ -33,14 +33,10 @@ module MCollective
           if line.include? '%'
             utilization = line.to_i
             highest_percent_full = utilization if utilization > highest_percent_full
-            if highest_percent_full > threshold
-              reply[:usage] = utilization
-            end
           end
-
-          reply[:usage] = highest_percent_full
-          reply.fail "Disk usage exceeded threshold of #{threshold}" unless highest_percent_full < threshold
         end
+        reply[:usage] = highest_percent_full
+        reply.fail "Disk usage exceeded threshold of #{threshold}" unless highest_percent_full < threshold
       end
 
       def run_is_mem_full(threshold)
