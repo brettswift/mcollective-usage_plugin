@@ -17,8 +17,13 @@ action "disk", :description => "Check disk space usage against threshold" do
         :maxlength   => 2
 
   output :usage,
-         :description => "Disk Usage %",
-         :display_as  => "Disk Usage %",
+         :description => "Percent of highest usage disk",
+         :display_as  => "Highest Disk Usage %",
+         :default     => "unknown"
+
+  output :offending_disk,
+         :description => "Mount point with highest usage",
+         :display_as  => "Disk with highest usage",
          :default     => "unknown"
 end
 
