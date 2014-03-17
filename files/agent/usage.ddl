@@ -9,7 +9,7 @@ metadata :name        => "usage",
 
 action "disk", :description => "Check disk space usage against threshold" do
   input :threshold,
-        :prompt      => "Threshold to check",
+        :prompt      => "Threshold to check (%)",
         :description => "Percent to check against",
         :type        => :string,
         :validation  => '^[0-9]{2}',
@@ -22,7 +22,36 @@ action "disk", :description => "Check disk space usage against threshold" do
         :display_as  => "Disk Usage %",
         :default     => "unknown"
 
-  summarize do
-      aggregate summary(:usage)
-    end
+
+ action "mem", :description => "Check free memory usage against threshold (using buffers/cache)" do
+   input :threshold,
+         :prompt      => "Threshold to check (%)",
+         :description => "Percent to check against",
+         :type        => :string,
+         :validation  => '^[0-9]{2}',
+         :optional    => true,
+         :maxlength   => 2,
+         :default     => 80
+
+   output :usage,
+         :description => "Memory Usage %",
+         :display_as  => "Memory Usage %",
+         :default     => "unknown"
+
+
+ action "swap", :description => "Check swap usage against threshold" do
+   input :threshold,
+         :prompt      => "Threshold to check (%)",
+         :description => "Percent to check against",
+         :type        => :string,
+         :validation  => '^[0-9]{2}',
+         :optional    => true,
+         :maxlength   => 2,
+         :default     => 40
+
+   output :usage,
+         :description => "Swap Usage %",
+         :display_as  => "Swap Usage %",
+         :default     => "unknown"
+
 end
