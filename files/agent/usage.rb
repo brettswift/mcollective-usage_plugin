@@ -44,14 +44,13 @@ module MCollective
         cmd_percent_free = "free -m | awk '\/Mem:\/ \{ total=$2 \} \/buffers\\/cache\/ \{ used=$4 \} END \{ print used\/total\}'"
 
         percent_free = `#{cmd_percent_free}`.to_f * 100
-        usage = out.to_i
+        usage = percent_free.to_i
 
         cmd_free_mb = "free -m | awk '\/buffers\\/cache\/ \{ print $4 \}' "
         free_mem = `#{cmd_free_mb}`
-        puts "free memory: #{free_mem}"
 
         reply[:usage] = usage
-        reply[:free_mb] = free_mb
+        reply[:free_mb] = free_mem
         reply.fail "Memory usage exceeded threshold of #{threshold}" unless usage < threshold
       end
 
@@ -59,16 +58,15 @@ module MCollective
       def run_swap_check(threshold)
         cmd_swap = "free -m | awk '\/Swap:\/ \{ total=$2;  used=$3\} END \{ print used\/total\}'"
 
-        out_swap = `#{cmdswap}`.to_f * 100
-        swap_usage = out_swap.to_i
+        percentage_swap = `#{cmd_swap}`.to_f * 100
+        swap_usage = percentage_swap.to_i
 
         cmd_free_swap = "free -m | awk '\/Swap\/ \{ print $4 \}' "
         free_swap_mb = `#{cmd_free_swap}`
-        puts "free memory: #{free_mem}"
 
-        reply[:usage] = usage
-        reply[:free_swap_mb] = cmd_free_swap
-        reply.fail "Swap usage exceeded threshold of #{threshold}" unless usage < threshold
+        reply[:usage] = swap_usage
+        reply[:free_swap_mb] = free_swap_mb
+        reply.fail "Swap usage exceeded threshold of #{threshold}" unless swap_usage < threshold
       end
     end
   end
