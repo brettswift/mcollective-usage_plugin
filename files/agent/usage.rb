@@ -35,8 +35,9 @@ module MCollective
             end
           end
 
-        reply[:usage] = highest_percent_full
-        reply.fail "Disk usage exceeded threshold of #{threshold}" unless highest_percent_full < threshold
+          reply[:usage] = highest_percent_full
+          reply.fail "Disk usage exceeded threshold of #{threshold}" unless highest_percent_full < threshold
+        end
       end
 
       def run_is_mem_full(threshold)
