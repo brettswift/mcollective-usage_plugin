@@ -22,20 +22,26 @@ module MCollective
 
       private
       def run_is_disk_full(threshold)
-        cmd = "\/bin\/df  -h --total | awk '\{if (NR!=3) print $5; else print $4\}'"
+        # old: cmd = "\/bin\/df  -h --total | awk '\{if (NR!=3) print $5; else print $4\}'"
+        cmd = "/bin/df  -h --total | awk '{for (i=1;i<=NF;i++) {if ($i ~ /\%/) {print $i, $(i+1)}}}'"
 
         dfout = `#{cmd}`
 
         highest_percent_full = 0
+        highest_disk = ''
 
-        dfout = dfout.split(/\r?\n/)
-        dfout.each do |line|
-          if line.include? '%'
-            utilization = line.to_i
-            highest_percent_full = utilization if utilization > highest_percent_full
+        dfarray = dfout.split(/\r?\n/)
+        dfarray.each do |line|
+          usage_map = line.split('%')
+
+          utilization = usage_map[0].to_i
+          if utilization > highest_percent_full
+              highest_percent_full = utilization
+              highest_disk = usage_map[1]
           end
         end
         reply[:usage] = highest_percent_full
+        reply[:offending_disk] = highest_disk
         reply.fail "Disk usage exceeded threshold of #{threshold}" unless highest_percent_full < threshold
       end
 
