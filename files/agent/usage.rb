@@ -23,7 +23,7 @@ module MCollective
       private
       def run_is_disk_full(threshold)
         # old: cmd = "\/bin\/df  -h --total | awk '\{if (NR!=3) print $5; else print $4\}'"
-        cmd = "/bin/df  -h --total | awk '{for (i=1;i<=NF;i++) {if ($i ~ /\%/) {print $i, $(i+1)}}}'"
+        cmd = "/bin/df  -h --total --exclude-type iso9660 | awk '{for (i=1;i<=NF;i++) {if ($i ~ /\%/) {print $i, $(i+1)}}}'"
 
         dfout = `#{cmd}`
 
