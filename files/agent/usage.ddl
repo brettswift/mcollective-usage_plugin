@@ -29,8 +29,23 @@ end
 
 action "mem", :description => "Check free memory usage against threshold (using buffers/cache)" do
  input :threshold,
-       :prompt      => "Threshold to check (%)",
-       :description => "Percent to check against",
+       :prompt      => "Threshold to check usage above (%)",
+       :description => "Percent to check against for machines over the threshold",
+       :type        => :string,
+       :validation  => '^[0-9]{2}',
+       :optional    => true,
+       :maxlength   => 2
+
+ output :usage,
+        :description => "Memory Usage %",
+        :display_as  => "Memory Usage %",
+        :default     => "unknown"
+end
+
+action "mem_underutilized", :description => "Check free memory usage against threshold (using buffers/cache)" do
+ input :threshold,
+       :prompt      => "Threshold to check usage below (%)",
+       :description => "Percent to check against for machines under the threshold",
        :type        => :string,
        :validation  => '^[0-9]{2}',
        :optional    => true,
